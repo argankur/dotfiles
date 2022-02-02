@@ -1,0 +1,109 @@
+[alias]
+
+  a = add
+  b = branch
+  c = commit
+  f = fetch
+  g = grep
+  l = lg0
+  m = merge
+  o = checkout
+  p = pull --recurse-submodules
+  s = status -s
+  ss= status
+  w = whatchanged
+
+  ## add all
+  aa = add --all
+
+  # add just the files that are updated.
+  au = add --update
+
+
+  ### commit aliases ###
+
+  # commit - amend the tip of the current branch rather than creating a new commit.
+  ca = commit --amend --no-edit
+
+  # commit with a message
+  cm = commit --message
+
+  # commit - amend the tip of the current branch, and edit the message.
+  cam = commit --amend --message
+
+  # commit interactive
+  ci = commit --interactive
+
+  ### diff aliases ###
+
+  # Show the diff between the latest commit and the current state.
+  d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+  # Show changes not yet staged
+  dc = diff --cached
+
+  # Show changes about to be commited
+  ds = diff --staged
+
+  # Show changes but by word, not line
+  dw = diff --word-diff
+
+  # Show verbose output about tags, branches or remotes
+  tags = tag -l
+  branches = branch --all
+  remotes = remote --verbose
+
+        # Find commits by source code
+        fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+        # Find commits by commit message
+        fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+
+  lg0 = log --pretty=oneline -n 20 --graph --abbrev-commit
+        # View abbreviated SHA, description, and history graph of the latest 20 commits.
+
+  ll = ll2
+  lll = ll1
+
+  ll1 = log -n 15 --graph --abbrev-commit --decorate --format=format:'%C(red)%h%C(reset) -  %C(bold white)%s%C(reset)%n''       %C(yellow)%d%C(reset) %C(cyan)%as%C(reset)%n''        %C(green)by - %an (%cr) %cD %C(reset)'
+
+  ll2 = log -n 15 --graph --abbrev-commit --decorate --format=format:'%C(red)%h%C(reset) - %C(green)by- %an%C(reset) : %C(white)%s%C(reset)%n''       %C(yellow)%d%C(reset)  %C(cyan)(%cr) at:%cD%C(reset)'
+
+
+  lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%cr)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+  lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''         %C(dim white)by- %an%C(reset) : %C(white)%s%C(reset)'
+        lg = !"git lg1"
+
+
+
+  # List aliases.
+  aliases = config --get-regexp alias
+
+  # Amend the currently staged files to the latest commit.
+  amend = commit --amend --reuse-message=HEAD
+
+  # Credit an author on the latest commit.
+  credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+
+  # Interactive rebase with the given number of latest commits.
+  reb = "!r() { git rebase -i HEAD~$1; }; r"
+
+  # Find branches containing commit
+  fb = "!f() { git branch -a --contains $1; }; f"
+
+  # Find tags containing commit
+  ft = "!f() { git describe --always --contains $1; }; f"
+
+  # Find commits by source code
+  fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+  # Find commits by commit message
+  fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+  # List contributors with number of commits.
+  contributors = shortlog --summary --numbered
+
+  # Show the user email for the current repository.
+  whoami = config user.email
+
